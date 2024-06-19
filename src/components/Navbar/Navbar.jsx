@@ -20,6 +20,7 @@ import { useAppStore } from "../AppStore";
 import Avatar from "@mui/material/Avatar";
 import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
 import { getAuthToken, removeAuthTokenFromLocalStorage } from "../../dataApi/Data";
 
 const AppBar = styled(
@@ -144,26 +145,7 @@ const Navbar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={19} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+    
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -198,9 +180,9 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <div className="flex gap-5">
+            <div style={{paddingRight:20}} className="flex gap-5">
               <div>
-                <img src="../../../public/favicon.ico" alt="" />
+                <img src="favicon.ico" alt="" />
               </div>
               <Typography
                 variant="h6"

@@ -165,7 +165,7 @@ const SecureChannel = () => {
                             <div>
                               <img
                                 className="h-10 w-10 rounded-full object-contain"
-                                src="../../../public/navbar/user.png"
+                                src="/navbar/user.png"
                                 alt="A"
                               />
                             </div>
@@ -215,7 +215,7 @@ const SecureChannel = () => {
                             <div>
                               <img
                                 className="h-10 w-10 rounded-full object-contain"
-                                src="../../../public/navbar/user.png"
+                                src="/navbar/user.png"
                                 alt=""
                               />
                             </div>

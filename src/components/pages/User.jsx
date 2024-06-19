@@ -142,11 +142,11 @@ const User = () => {
               </Button>
             </div>
           </Box>
-          <Paper sx={{ width: "100%", mb: 2, borderRadius: "10px" }}>
-            <TableContainer className="px-2">
+          <Paper sx={{ width: "100%", mb: 2, borderRadius: "10px" }}  >
+            <TableContainer className="px-2 raju" >
               <hr />
               <Table
-                sx={{ minWidth: 350, border: "" }}
+                sx={{ minWidth: 240, border: "" }}
                 aria-labelledby="tableTitle"
               >
                 <TableRow className="">

@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -197,9 +194,7 @@ const AddUserForm = ({ rowData }) => {
                     <NativeSelect
                       value={userFormData.companyId}
                       onChange={handleInputChange}
-                      input={
-                        <OutlinedInput name="companyId" id="companyID" />
-                      }
+                      input={<OutlinedInput name="companyId" id="companyID" />}
                     >
                       <option aria-label="None" value="">
                         Select Company Name
@@ -262,21 +257,25 @@ const AddUserForm = ({ rowData }) => {
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <PhoneInput
-                    country={"in"}
-                    inputProps={{
-                      required: true,
-                      autoFocus: true,
-                    }}
-                    value={userFormData.phone}
-                    placeholder="Enter Your Phone No"
-                    onKeyDown={(e) => {
-                      if (e.keyCode === 8 && userFormData.phone.length <= 3) {
-                        e.preventDefault();
-                      }
-                    }}
-                    onChange={handalPhoneChange}
-                  />
+                  <div className="">
+                    <PhoneInput
+                      country={"in"}
+                      inputProps={{
+                        required: true,
+                        autoFocus: true,
+                        style: { width: "100%", boxSizing: "border-box" }, // Adjust width as needed
+                      }}
+                      value={userFormData.phone}
+                      placeholder="Enter Your Phone No"
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 10 && userFormData.phone.length <= 2) {
+                          e.preventDefault();
+                        }
+                      }}
+                      onChange={handalPhoneChange}
+                    />
+                  </div>
+
                   <span className="text-[12px] text-red-500 tracking-widest font-semibold">
                     {errors.phone}
                   </span>
@@ -326,38 +325,3 @@ const AddUserForm = ({ rowData }) => {
 };
 
 export default AddUserForm;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

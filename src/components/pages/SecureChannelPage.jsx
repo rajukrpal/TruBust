@@ -11,7 +11,7 @@ const SecureChannelPage = () => {
     <Box height={64} />
       <Box sx={{ display: 'flex' }}  >
       <SideNav/>
-      <Box className="p-8 w-full lg:px-[72px]">
+      <Box sx={{ minWidth: 240}} className="p-5 w-full lg:px-[72px]">
         <SecureChannel />
       </Box>
       </Box>

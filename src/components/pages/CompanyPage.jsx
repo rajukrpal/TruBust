@@ -10,7 +10,7 @@ const CompanyPage = () => {
     <Box height={64} />
       <Box sx={{ display: 'flex' }}  >
       <SideNav/>
-      <Box className="lg:p-8 w-full">
+      <Box sx={{ minWidth: 240}} className="lg:p-8 p-5 w-full">
         <Company/>
       </Box>
       </Box>

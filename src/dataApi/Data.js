@@ -48,8 +48,8 @@ export default async function fetchLogin(email, password) {
         
 
     } catch (error) {
-        
-        console.log(error);
+        throw new Error("Invalid email or password. Please try again.");
+        // console.log(error);
     }
 }
 

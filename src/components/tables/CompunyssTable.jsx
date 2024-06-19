@@ -154,7 +154,7 @@ const handleDelete = async (id) => {
         <TableContainer className="px-2">
           <hr />
           <Table
-            sx={{ minWidth: 350, border: "" }}
+            sx={{ minWidth: 310, border: "" }}
             aria-labelledby="tableTitle"
           >
             <TableRow className="">

@@ -118,7 +118,7 @@ const SupportTicket = () => {
             <TableContainer className="px-2">
               <hr />
               <Table
-                sx={{ minWidth: 450, border: "" }}
+                sx={{ minWidth: 310, border: "" }}
                 aria-labelledby="tableTitle"
               >
                 <TableRow className="">

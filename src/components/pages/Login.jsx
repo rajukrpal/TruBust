@@ -1,100 +1,129 @@
 import { useEffect, useState } from "react";
 import fetchLogin from "../../dataApi/Data";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const navigate = useNavigate();
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
-  const [data,setData] = useState("")
-  const [errors, setErrors] = useState({email:"",password:""});
-  const [loading , setLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [data, setData] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handalFormSubmit = async(e) =>{
+
+
+  const handalFormSubmit = async (e) => {
     e.preventDefault();
-    const emailError = email === '' ? 'Email is required' : '';
-    const passwordError = password === '' ? 'Password is required' : '';
+    const emailError = email === "" ? "Email is required" : "";
+    const passwordError = password === "" ? "Password is required" : "";
     setErrors({ email: emailError, password: passwordError });
     if (emailError || passwordError) {
-      return;
+        return;
     }
 
     try {
-      setLoading(true)
-      const data_login = await fetchLogin(email, password);
-      // console.log("chack--",data_login)
+        setLoading(true);
+        const data_login = await fetchLogin(email, password);
 
-      
-      if (data_login.success === true) {
-        setLoading(false)
-        setData(data_login);
-        navigate('/analytics');
-      } else {
-        navigate("/")
-          // throw new Error("Login failed"); 
-      }
-  } catch (error) {
-    setLoading(false)
-      setEmail("");
-      setPassword("");
-  }
-  
-  }
-
-  useEffect(()=>{
-    let authToken = localStorage.getItem('authToken') // authToken me authToken key mil rha hai
-    if(authToken){
-        navigate('/analytics')
-    }else{
-      navigate('/')
+        if (data_login.success === true) {
+            setLoading(false);
+            setData(data_login);
+            navigate("/analytics");
+        } else {
+            setLoading(false);
+            setErrorMessage("Invalid email or password. Please try again.");
+            setPassword("");
+        }
+    } catch (error) {
+        setLoading(false);
+        setErrorMessage(error.message); 
+        setPassword("");
     }
-},[navigate])
+};
+
+  useEffect(() => {
+    let authToken = localStorage.getItem("authToken"); 
+    if (authToken) {
+      navigate("/analytics");
+    } else {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>
       <div className="md:grid grid-cols-12   h-[100vh] bg-[#e2dfe9]">
         <div className="col-span-7 flex items-center justify-center ">
-            <img className="lg:max-h-[550px] h-[400px]" src="/login/loginimg.png" alt="" />
+          <img
+            className="lg:max-h-[550px] h-[400px]"
+            src="/login/loginimg.png"
+            alt=""
+          />
         </div>
         <div className="col-span-5  flex justify-center items-center bg-[#e2dfe9] px-4 py-4">
-            
-            <div className="lg:w-[350px] w-[300px] ">
+          <div className="lg:w-[350px] w-[300px] ">
             <div>
-                <img src="/favicon.ico" alt="" />
+              <img src="/favicon.ico" alt="" />
             </div>
-                <h2 className="text-start font-bold text-[22px] py-2">Welcome to Trubust! 👋</h2>
-                <form onSubmit={handalFormSubmit}>
-                    <div className="space-y-8">
+            <h2 className="text-start font-bold text-[22px] py-2">
+              Welcome to Trubust! 👋
+            </h2>
+            <form onSubmit={handalFormSubmit}>
+              <div className="space-y-8">
                 <div className="flex flex-col space-y-1">
-                <label className="" htmlFor="">Email</label>
-                <input value={email} className="py-3 px-2 border border-gray-300 outline-none rounded-lg w-full" id="email" type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Your Email" />
-                <span className="text-[#E42D2D] text-sm" id="emailError">{errors.email}</span>
+                  <label className="" htmlFor="">
+                    Email
+                  </label>
+                  <input
+                    value={email}
+                    className="py-3 px-2 border border-gray-300 outline-none rounded-lg w-full"
+                    id="email"
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter Your Email"
+                  />
+                  <span className="text-[#E42D2D] text-sm" id="emailError">
+                    {errors.email}
+                  </span>
                 </div>
                 <div className="flex flex-col space-y-1">
-                <label htmlFor="">Password</label>
-                <input value={password} className="py-3 px-2 border border-gray-300 outline-none rounded-lg" id="password" onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="********" />
-                <span className="text-[#E42D2D] text-sm" id="passwordError">{errors.password}</span>
+                  <label htmlFor="">Password</label>
+                  <input
+                    value={password}
+                    className="py-3 px-2 border border-gray-300 outline-none rounded-lg"
+                    id="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    placeholder="********"
+                  />
+                  <span className="text-[#E42D2D] text-sm" id="passwordError">
+                    {errors.password}
+                  </span>
+                  <span>
+                  {errorMessage && <span className="text-red-500 text-sm">{errorMessage}</span>}
+                  </span>
                 </div>
                 <div>
-                <button className="bg-[#684df4] w-full py-2 text-white font-semibold tracking-wider rounded-md outline-none" type="submit" >Sign in</button>
+                  <button
+                    className="bg-[#684df4] w-full py-2 text-white font-semibold tracking-wider rounded-md outline-none"
+                    type="submit"
+                  >
+                    Sign in
+                  </button>
                 </div>
-                </div>
-                </form>
-                {loading && <div className="mt-3 px-10 font-semibold tracking-widest">Loading...</div>}
-                
-            </div>
+              </div>
+            </form>
+            {loading && (
+              <div className="mt-3 px-10 font-semibold tracking-widest">
+                Loading...
+              </div>
+            )}
+          </div>
         </div>
       </div>
-            
     </>
-  )
-}
+  );
+};
 
-export default Login
-
-
-
-
-
-
+export default Login;
