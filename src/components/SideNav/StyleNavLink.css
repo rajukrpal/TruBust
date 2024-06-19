@@ -1,0 +1,27 @@
+.active{
+    color: rgb(11, 105, 247) !important ;
+    font-weight: 800 !important ;
+    background-color: yellow !important;
+    
+}
+
+.hiddinNUM{
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+}
+
+
+@media screen and (max-width: 768px) {
+  .stack-md {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .stack-sm {
+    flex-direction: row;
+  }
+}
