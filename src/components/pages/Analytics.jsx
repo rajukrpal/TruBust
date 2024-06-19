@@ -30,11 +30,11 @@ const Analytics = () => {
   return (
     <>
 
-      <div className="lg:px-20">
-        <div className="grid grid-cols-12 space-x-4">
-          <div className="lg:col-span-4 md:col-span-6 col-span-12 border shadow-xl shadow-green-200 rounded-lg">
+      <div className="lg:px-2">
+        <div className="grid grid-cols-12 lg:space-x-4 md:space-y-0 space-y-4 ">
+          <div className="lg:col-span-4 md:col-span-6 col-span-12 border shadow-md shadow-green-200 rounded-lg">
             <div className="p-3 px-6">
-              <div className="space-y-2">
+              <div className="md:space-y-0 space-y-2">
                 <div className="bg-[#dff7e9] w-fit p-3 rounded-full">
                   <CreditCardIcon className="text-[#6dd99d]" />
                 </div>
@@ -48,7 +48,7 @@ const Analytics = () => {
             </div>
             <img src="/analytics/Graph.png" alt="" />
           </div>
-          <div className="lg:col-span-4 md:col-span-6 col-span-12 border shadow-xl shadow-green-200 rounded-lg">
+          <div className="lg:col-span-4 md:col-span-6 col-span-12 border shadow-md shadow-green-200 rounded-lg">
             <div className="p-3 px-6">
               <div className="space-y-2">
                 <div className="bg-[#dff7e9] w-fit p-3 rounded-full">
@@ -65,7 +65,7 @@ const Analytics = () => {
             <img src="/analytics/Graph.png" alt="" />
           </div>
           <div className="lg:col-span-4 col-span-12 space-y-5">
-            <div className="shadow-xl shadow-red-200 border rounded-lg p-8 px-8">
+            <div className="shadow-md shadow-red-200 border rounded-lg p-8 px-8">
               <div className="flex gap-4 py-2 items-center">
                 <div className="bg-[#fce5e6] p-3 rounded-xl">
                   <AccountTreeIcon className="text-[#ea595a] " />
@@ -84,7 +84,7 @@ const Analytics = () => {
                 </h6>
               </div>
             </div>
-            <div className="border shadow-xl shadow-red-200 rounded-lg p-8 px-8">
+            <div className="border shadow-md shadow-red-200 rounded-lg p-8 px-8">
               <div className="flex gap-4 py-2 items-center">
                 <div className="bg-[#fce5e6] p-3 rounded-xl">
                   <AccountTreeIcon className="text-[#ea595a]" />
@@ -106,16 +106,13 @@ const Analytics = () => {
         </div>
         <Box className="py-8" />
         <div>
-          <div className="lg:grid grid-cols-12 gap-10">
-            <div className="col-span-7 rounded-lg shadow-xl shadow-blue-100 border">
-              <div className="p-5">
+          <div className="lg:grid grid-cols-12 md:space-x-4 md:space-y-0 space-y-4">
+            <div className="col-span-7 rounded-lg shadow-md shadow-blue-100 border">
                 <AxisChart />
-              </div>
             </div>
-            <div className="col-span-5 rounded-lg shadow-xl shadow-blue-100 border ">
+            <div className="col-span-5 rounded-lg shadow-md shadow-blue-100 border ">
               <div className="h-[500px]  ">
-                <div className="flex justify-center items-center h-full">
-                  {/* <img src="/analytics/tracker.png" alt="" /> */}
+                <div className="flex justify-center items-center h-full ">
                   <ProgresChart />
                 </div>
               </div>
@@ -124,9 +121,9 @@ const Analytics = () => {
         </div>
         <Box className="py-8" />
         <div>
-          <div className="lg:grid grid-cols-12 gap-10 ">
+          <div className="lg:grid grid-cols-12 lg:space-x-4 lg:space-y-0  space-y-4 ">
             <div className="col-span-5">
-              <div className="border shadow-xl shadow-blue-100 rounded-lg p-8 px-8">
+              <div className="border shadow-md shadow-blue-100 rounded-lg p-8 px-8">
                 <div className="flex gap-4 py-2 items-center">
                   <div className="bg-[#BFD8ED] p-3 rounded-xl">
                     <AccountTreeIcon className="text-[#1F8FEC]" />
@@ -145,7 +142,7 @@ const Analytics = () => {
                 </div>
               </div>
               {/*  */}
-              <div className="border shadow-xl shadow-blue-100 rounded-lg p-8 px-8">
+              <div className="border shadow-md shadow-blue-100 rounded-lg p-8 px-8">
                 <div className="flex gap-4 py-2 items-center">
                   <div className="bg-[#BFD8ED] p-3 rounded-xl">
                     <AccountTreeIcon className="text-[#1F8FEC]" />
@@ -171,7 +168,7 @@ const Analytics = () => {
             </div>
           </div>
         </div>
-        <Box className="py-8" />
+        <Box className="py-1" />
       </div>
     </>
   );

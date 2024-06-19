@@ -15,26 +15,10 @@ import { AnalyticsFeatchData } from '../../dataApi/Data';
 import { useEffect, useState } from 'react';
 
 
-
-// const dataset = [
-//   { min: 0,  month: 'Jan' },
-//   { min: 3,  month: 'Feb' },
-//   { min: 4, month: 'Mar' },
-//   { min: 0, month: 'Apr' },
-//   { min: 1,  month: 'May' },
- 
-// ];
-
 const series = [
   { type: 'line', dataKey: 'count', color: '#577399' },
 ];
 
-// Filter out data points with min value of 0
-// const filteredDataset = dataset.filter(data => data.min !== 0);
-
-// const series = [
-//   { type: 'line', dataKey: `min`, color: '#577399' },
-// ];
 
 const AxisChart = () => {
   const [chart,setChart] = useState([]);
@@ -43,9 +27,7 @@ const AxisChart = () => {
     const fetchData = async () => {
       try {
         const dashBordData = await AnalyticsFeatchData();
-        // console.log("data:-",dashBordData.data.totalCompany)
         setChart(dashBordData.data.totalCompany);
-        // console.log("raju:-",chart);
         
       } catch (error) {
         console.log(error);
@@ -61,16 +43,9 @@ const AxisChart = () => {
   return (
     
     <Stack sx={{ width: '100%' }}>
-    {/* {chart.map((item,index)=>(
-      <>
-      <h1 key={index}>{item.month}</h1>
-      <h1 key={index}>{item.year}</h1>
-      <h1 key={index}>{item.count}</h1>
-      </>
-    ))} */}
       
       <Box sx={{ width: '100%' }}>
-        <Typography variant='h5' sx={{fontWeight:600}}>
+        <Typography variant='h5' sx={{fontWeight:600 , paddingLeft:3}}>
           Total company
         </Typography>
         <ResponsiveChartContainer
@@ -84,7 +59,7 @@ const AxisChart = () => {
           ]}
           // dataset={filteredDataset}
           dataset={chart}
-          height={400}
+          height={350}
         >
           <ChartsGrid horizontal />
           <LinePlot />

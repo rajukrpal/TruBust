@@ -17,7 +17,7 @@ const AnalyticsPage = () => {
     <Box height={64}  />
       <Box sx={{ display: 'flex' }}  >
       <SideNav/>
-      <Box sx={{ minWidth: 240}} className="p-5 ">
+      <Box sx={{ minWidth: 240}} className="py-2 ">
         <Analytics />
       </Box>
       </Box>

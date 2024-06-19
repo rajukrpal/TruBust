@@ -81,7 +81,7 @@ const AnalyticTable = () => {
     <Box 
     sx={{
       width: "100%",
-      boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+      boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
       borderRadius: "10px",
     }}
     className="">

@@ -77,7 +77,7 @@ const SideNav = () => {
       <Box className="" sx={{ display: "flex" }}>
         <CssBaseline />
         <Drawer variant="permanent" open={open}>
-          <Box className="" height={60} />
+          <Box className="" height={54} />
           <Divider />
           <List sx={{ backgroundColor: "" }}>
             <NavLink
