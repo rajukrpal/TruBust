@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
@@ -83,7 +83,15 @@ const ChatsForm = ({ rowData }) => {
     <div>
       {showForm ? (
         <>
-          <div className="border border-black px-5 rounded-lg">
+          <Box
+          sx={{
+            width: "100%",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
+            borderRadius: "10px",
+          }}
+          className=""
+        >
+          <div className="px-5 rounded-lg">
             <div>
               <div className="flex justify-end py-3">
                 <Button
@@ -102,7 +110,7 @@ const ChatsForm = ({ rowData }) => {
               </div>
             </div>
 
-            <div className=" h-[65vh] overflow-y-auto">
+            <div className=" h-[65vh] overflow-y-auto custom-scrollbar">
               {/* user */}
               {chatDataList.map((chat, index) => (
                 <div key={index} className="pt-5">
@@ -218,6 +226,7 @@ const ChatsForm = ({ rowData }) => {
             </div>
            
           </div>
+          </Box>
         </>
       ) : (
         <>

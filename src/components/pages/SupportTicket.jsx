@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import {GetSupportTicketApi } from "../../dataApi/Data";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import ViewPage from "../form/ViewPage";
 import { PiWechatLogo } from "react-icons/pi";
 import ChatsForm from "../form/ChatsForm";
@@ -29,6 +29,19 @@ const SupportTicket = () => {
 
   const [rowData, setRowData] = useState(null);
   const [companyData, setCompanyData] = useState("");
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setFilteredTable([...filteredTable]);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [filteredTable]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +104,31 @@ const SupportTicket = () => {
     setShowForm(true);
   };
 
- 
+  const isSmallScreen = useMediaQuery('(max-width:768px)');
+
+  const truncate = (text, maxLength) => {
+    if (!text) {
+      return  <span className="text-[#EF3E36]"> No Name</span>; // Return "No Name" if text is falsy (null, undefined, empty string)
+    }
+    
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    
+    return text;
+  };
+  
+  
+  const truncateText = (text, maxLength) => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      return truncate(text, 10); 
+    } else if(screenWidth < 1024) {
+      return truncate(text, 10); 
+    } else{
+      return truncate(text, 25);
+    }
+  };
 
 
   return (
@@ -104,7 +141,7 @@ const SupportTicket = () => {
         <Box
           sx={{
             width: "100%",
-            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
             borderRadius: "10px",
           }}
           className=""
@@ -118,14 +155,14 @@ const SupportTicket = () => {
             <TableContainer className="px-2">
               <hr />
               <Table
-                sx={{ minWidth: 310, border: "" }}
+                sx={{ minWidth: 610, border: "" }}
                 aria-labelledby="tableTitle"
               >
                 <TableRow className="">
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '60px' : '100px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -137,32 +174,32 @@ const SupportTicket = () => {
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '60px' : '100px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("name")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
-                    Company name {getArrow("name")}
+                    {isSmallScreen ? "Company..." : "Company name"} {getArrow("name")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '60px' : '100px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("total_users")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    user name {getArrow("total_users")}
+                    {isSmallScreen ? "User..." : "User name"} {getArrow("total_users")}
                   </TableCell>
                 
                   <TableCell
                     className="uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '60px' : '100px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -182,8 +219,8 @@ const SupportTicket = () => {
                           {new Date(row.created_at).toLocaleDateString()}
                           </div>
                         </TableCell>
-                        <TableCell align="left">{row.companyName}</TableCell>
-                        <TableCell align="left">{row.userName}</TableCell>
+                        <TableCell align="left"><span>{truncateText(row.companyName)}</span></TableCell>
+                        <TableCell align="left"><span></span>{truncateText(row.userName)}</TableCell>
                         <TableCell align="left">
                           <div className="flex gap-5 w-full">
                             <div className="w-[10%]" 

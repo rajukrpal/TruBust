@@ -77,12 +77,12 @@ useEffect(()=>{
         <Button variant='contained' onClick={handaleClose}>Close</Button>
       </h1>
       <div>
-        <div className='lg:grid grid-cols-12 lg:gap-6 '>
+        <div className='lg:grid grid-cols-12 lg:gap-3 '>
           <div className='col-span-5'>
             <div>
             <Box sx={{
                width: "100%",
-               boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+               boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
                borderRadius: "10px",
                paddingTop:""
             }}>
@@ -150,7 +150,7 @@ useEffect(()=>{
           <div className='pt-10'>
           <Box sx={{
              width: "100%",
-             boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+             boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
              borderRadius: "10px",
              paddingTop:""
           }}>
@@ -200,7 +200,7 @@ useEffect(()=>{
             <Box 
             sx={{
               width: "100%",
-              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+              boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
               borderRadius: "10px",
               paddingTop:""
             }}
@@ -245,7 +245,7 @@ useEffect(()=>{
           <Box sx={{gap:20}}>
             <Box sx={{
                width: "100%",
-               boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+               boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
                borderRadius: "10px",
             }}>
             <div className=' p-3' >
@@ -272,10 +272,10 @@ useEffect(()=>{
             </div>
             </Box>
 
-            <div className=' pt-10'>
+            <div className=' pt-6'>
               <ViewsTableEndPointsList  endPointsList={endPointsList} />
             </div>
-              <div className='  pt-10'>
+              <div className='  pt-3'>
             <ViewTableExternalRequest externalRequest={externalRequest} requestData={requestData} />
               </div>
            

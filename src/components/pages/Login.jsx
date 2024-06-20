@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import fetchLogin from "../../dataApi/Data";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,39 +13,47 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-
+  const notifySuccess = () => toast.success("Log in SuccessFully!");
+  const notifyError = () => toast.error("Invalid email or password !");
 
   const handalFormSubmit = async (e) => {
     e.preventDefault();
     const emailError = email === "" ? "Email is required" : "";
-    const passwordError = password === "" ? "Password is required" : "";
+    const passwordError = errorMessage
+      ? ""
+      : password === ""
+      ? "Password is required"
+      : "";
     setErrors({ email: emailError, password: passwordError });
     if (emailError || passwordError) {
-        return;
+      return;
     }
 
     try {
-        setLoading(true);
-        const data_login = await fetchLogin(email, password);
+      setLoading(true);
+      const data_login = await fetchLogin(email, password);
 
-        if (data_login.success === true) {
-            setLoading(false);
-            setData(data_login);
-            navigate("/analytics");
-        } else {
-            setLoading(false);
-            setErrorMessage("Invalid email or password. Please try again.");
-            setPassword("");
-        }
-    } catch (error) {
+      if (data_login.success === true) {
+        notifySuccess();
         setLoading(false);
-        setErrorMessage(error.message); 
+        setData(data_login);
+        navigate("/analytics");
+      } else {
+        notifyError();
+        setLoading(false);
+        setErrorMessage("Invalid email or password. Please try again.");
         setPassword("");
+      }
+    } catch (error) {
+      notifyError();
+      setLoading(false);
+      setErrorMessage(error.message);
+      setPassword("");
     }
-};
+  };
 
   useEffect(() => {
-    let authToken = localStorage.getItem("authToken"); 
+    let authToken = localStorage.getItem("authToken");
     if (authToken) {
       navigate("/analytics");
     } else {
@@ -101,21 +111,30 @@ const Login = () => {
                     {errors.password}
                   </span>
                   <span>
-                  {errorMessage && <span className="text-red-500 text-sm">{errorMessage}</span>}
+                    {errorMessage && (
+                      <span className="text-red-500 text-sm">
+                        {errorMessage}
+                      </span>
+                    )}
                   </span>
                 </div>
                 <div>
                   <button
-                    className="bg-[#684df4] w-full py-2 text-white font-semibold tracking-wider rounded-md outline-none"
+                    className={
+                      loading
+                        ? "bg-[#9a8be4] w-full py-2 text-white font-semibold tracking-wider rounded-md outline-none cursor-not-allowed"
+                        : "bg-[#684df4] w-full py-2 text-white font-semibold tracking-wider rounded-md outline-none"
+                    }
                     type="submit"
                   >
-                    Sign in
+                    {loading ? "Signing..." : "Singn"}
                   </button>
+                  <ToastContainer position="bottom-right" />
                 </div>
               </div>
             </form>
             {loading && (
-              <div className="mt-3 px-10 font-semibold tracking-widest">
+              <div className="py-2 px-10 font-semibold tracking-widest">
                 Loading...
               </div>
             )}

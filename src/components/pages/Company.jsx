@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getCopmonypageTable } from '../../dataApi/Data';
-// import AnalyticTable from '../tables/AnalyticTable';
 import CompunyssTable from '../tables/CompunyssTable';
+
 
 const Company = () => {
   const [tabledata,setTabledata] = useState({
@@ -22,6 +22,7 @@ const Company = () => {
   });
   const [coumpanyTable,setCoumpanyTable] = useState([]);
 
+
   useEffect(()=>{
     const fetchData = async() =>{
       try {
@@ -38,8 +39,8 @@ const Company = () => {
 
   },[tabledata])
   return (
-    <div className='md:px-10'>
-      <CompunyssTable className="shadow-orange-400 shadow-lg" />
+    <div className='lg:px-2'>
+      <CompunyssTable className="" />
     </div>
   )
 }

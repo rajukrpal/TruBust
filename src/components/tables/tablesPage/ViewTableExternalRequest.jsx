@@ -12,9 +12,7 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { approveAndDecline } from "../../../dataApi/Data";
 
-const ViewTableExternalRequest = ({  requestData }) => {
-  // console.log("second table", externalRequest);
-  console.log("requestData=", requestData);
+const ViewTableExternalRequest = ({ requestData }) => {
   const [table, setTable] = useState([]);
   const [filteredTable, setFilteredTable] = useState([]);
   const [page, setPage] = useState(0);
@@ -63,30 +61,22 @@ const ViewTableExternalRequest = ({  requestData }) => {
     return "";
   };
 
+  const ApproveOrDecline = async () => {
+    const ApprovData = await approveAndDecline();
+  };
 
-    const ApproveOrDecline = async() => {
-      const ApprovData = await approveAndDecline();
-      console.log(ApprovData)
-    }
- 
-    const ApproveClick = (rowId,status) =>{
-      console.log("parameter",status)
-      console.log("rrrrr",rowId)
-      console.log("ApproveClick")
-    }
-    
-    const DeclinceClick = (rowId,status) =>{
-      console.log("rrrrr",rowId)
-      console.log("parameter",status)
-      console.log("DeclinceClick")
-    }
+  const ApproveClick = (rowId, status) => {};
+
+  const DeclinceClick = (rowId, status) => {};
 
   return (
-    <Box sx={{
-      width: "100%",
-      boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
-      borderRadius: "10px",
-      }}>
+    <Box
+      sx={{
+        width: "100%",
+        boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
+        borderRadius: "10px",
+      }}
+    >
       <Box>
         <Typography variant="h6" sx={{ fontWeight: 700, padding: 3 }}>
           External Request
@@ -94,16 +84,20 @@ const ViewTableExternalRequest = ({  requestData }) => {
       </Box>
 
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <TableContainer className="px-2">
+        <TableContainer className="px-2 custom-scrollbar">
           <hr />
           <Table
-            sx={{ minWidth: 750, border: "" }}
+            sx={{ minWidth: 1050, border: "" }}
             aria-labelledby="tableTitle"
           >
             <TableRow className="">
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "100px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("date")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
@@ -111,7 +105,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "150px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("company_name")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
@@ -119,7 +117,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "120px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("user_name")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
@@ -127,7 +129,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "120px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("message")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
@@ -135,7 +141,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "100px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("image")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
@@ -143,7 +153,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "120px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("request_id")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
@@ -151,7 +165,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "100px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("status")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
@@ -159,7 +177,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
               </TableCell>
               <TableCell
                 className="uppercase"
-                style={{ width: "25%", padding: "12px 14px", fontWeight: 600 }}
+                style={{
+                  width: "100px",
+                  padding: "12px 14px",
+                  fontWeight: 600,
+                }}
                 onClick={() => handleSort("actions")}
               >
                 actions{getArrow("actions")}
@@ -169,7 +191,11 @@ const ViewTableExternalRequest = ({  requestData }) => {
             {requestData.length === 0 ? (
               <TableBody style={{ height: 300 }}>
                 <TableRow>
-                  <TableCell colSpan={8} align="center">
+                  <TableCell
+                    colSpan={8}
+                    align="center"
+                    style={{ height: "300px", verticalAlign: "middle" }}
+                  >
                     No data available
                   </TableCell>
                 </TableRow>
@@ -180,7 +206,6 @@ const ViewTableExternalRequest = ({  requestData }) => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <TableRow key={row.id}>
-                      {console.log("ididididi",row.id)}
                       <TableCell component="th" scope="row" padding="none">
                         {/* {new Date(row.created_at).toLocaleString()} */}
                         {new Date(row.created_at).toLocaleDateString()}
@@ -188,20 +213,62 @@ const ViewTableExternalRequest = ({  requestData }) => {
                       <TableCell align="left">{row.company_name}</TableCell>
                       <TableCell align="left">{row.username}</TableCell>
                       <TableCell align="left">{row.message}</TableCell>
-                      <TableCell align="left"> <img src={row.image} alt="image" /></TableCell>
+                      <TableCell align="left">
+                        {" "}
+                        <img src={row.image} alt="image" />
+                      </TableCell>
                       <TableCell align="left">{row.requestID}</TableCell>
                       <TableCell align="left">
-                        {row.status === 0 && <span>{<button className="rounded-lg p-2 bg-yellow-400 ">penting</button>}</span>}
-                        {row.status === 1 && <span>{<button className="rounded-lg p-2 bg-green-400">Approve</button>}</span>}
-                        {row.status === 2 && <span>{<button className="rounded-lg p-2  bg-red-500">decline</button>}</span>}
+                        {row.status === 0 && (
+                          <span>
+                            {
+                              <button className="rounded-lg p-2 bg-yellow-400 ">
+                                penting
+                              </button>
+                            }
+                          </span>
+                        )}
+                        {row.status === 1 && (
+                          <span>
+                            {
+                              <button className="rounded-lg p-2 bg-green-400">
+                                Approve
+                              </button>
+                            }
+                          </span>
+                        )}
+                        {row.status === 2 && (
+                          <span>
+                            {
+                              <button className="rounded-lg p-2  bg-red-500">
+                                decline
+                              </button>
+                            }
+                          </span>
+                        )}
                       </TableCell>
 
                       <TableCell align="left">
-                        {row.status === 0 && <span>{
-                          <div className="flex gap-3">
-                            <button className="rounded-lg p-2 bg-green-400 " onClick={() => ApproveClick(row.id,1)}>Approve</button> 
-                            <button className="rounded-lg p-2 bg-red-500 " onClick={() => DeclinceClick(row.id,2)}>declince</button>
-                            </div>}</span>}
+                        {row.status === 0 && (
+                          <span>
+                            {
+                              <div className="flex gap-3">
+                                <button
+                                  className="rounded-lg p-2 bg-green-400 "
+                                  onClick={() => ApproveClick(row.id, 1)}
+                                >
+                                  Approve
+                                </button>
+                                <button
+                                  className="rounded-lg p-2 bg-red-500 "
+                                  onClick={() => DeclinceClick(row.id, 2)}
+                                >
+                                  declince
+                                </button>
+                              </div>
+                            }
+                          </span>
+                        )}
                         {row.status === 1 && <span>{null}</span>}
                         {row.status === 2 && <span>{null}</span>}
                       </TableCell>

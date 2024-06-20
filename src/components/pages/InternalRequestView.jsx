@@ -12,11 +12,9 @@ import Paper from "@mui/material/Paper";
 import { GetInternalRequest } from "../../dataApi/Data";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Button } from "@mui/material";
 import ViewPage from "../form/ViewPage";
-import { PiWechatLogo } from "react-icons/pi";
-import ChatsForm from "../form/ChatsForm";
 import ExternalChatRequest from "../form/ExternalChatRequest";
+import { useMediaQuery } from "@mui/material";
 
 
 const InternalRequestView = () => {
@@ -94,6 +92,33 @@ const InternalRequestView = () => {
     setShowForm(true);
   };
 
+  const isSmallScreen = useMediaQuery('(max-width:768px)');
+
+  const truncate = (text, maxLength) => {
+    if (!text) {
+      return <span className="text-[#EF3E36]"> No Name</span>; // Return "No Name" if text is falsy (null, undefined, empty string)
+    }
+    
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    
+    return text;
+  };
+  
+  
+  const truncateText = (text, maxLength) => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      return truncate(text, 10); 
+    } else if(screenWidth < 1024) {
+      return truncate(text, 10); 
+    } else{
+      return truncate(text, 25);
+    }
+  };
+
+
 
   return (
     <>
@@ -105,7 +130,7 @@ const InternalRequestView = () => {
         <Box
           sx={{
             width: "100%",
-            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
             borderRadius: "10px",
           }}
           className=""
@@ -119,14 +144,14 @@ const InternalRequestView = () => {
             <TableContainer className="px-2">
               <hr />
               <Table
-                sx={{ minWidth: 310, border: "" }}
+                sx={{ minWidth: 510, border: "" }}
                 aria-labelledby="tableTitle"
               >
                 <TableRow className="">
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '70px' : '60px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -138,45 +163,45 @@ const InternalRequestView = () => {
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "190px",
+                      width: isSmallScreen ? '70px' : '100px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("Company_name")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
-                    Company name {getArrow("Company_name")}
+                    {isSmallScreen ? "Company..." : "Company Name"} {getArrow("Company_name")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "200px",
+                      width: isSmallScreen ? '70px' : '80px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("user_name")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    sender name {getArrow("user_name")}
+                    {isSmallScreen ? "sender..." : "sender name"}{getArrow("user_name")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "200px",
+                      width: isSmallScreen ? '70px' : '80px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("message")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                   recever name {getArrow("message")}
+                    {isSmallScreen ? "recever..." : "recever name"} {getArrow("message")}
                   </TableCell>
               
                   
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '100px' : '150px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -197,13 +222,13 @@ const InternalRequestView = () => {
                           {new Date(row.created_at).toLocaleDateString()}
                           </div>
                         </TableCell>
-                        <TableCell align="left">{row.company_name}</TableCell>
-                        <TableCell align="left">{row.sendername}</TableCell>
-                        <TableCell align="left">{row.receivername}</TableCell>
-                        <TableCell sx={{fontWeight:600,letterSpacing:"1px"}} align="left">
-                        {row.status === 0 && <span>{<button className="rounded-lg p-2 bg-yellow-400 ">Penting</button>}</span>}
-                        {row.status === 1 && <span>{<button className="rounded-lg p-2 bg-green-400">Approve</button>}</span>}
-                        {row.status === 2 && <span>{<button className="rounded-lg p-2  bg-red-500">Decline</button>}</span>}
+                        <TableCell align="left">{truncateText(row.company_name)}</TableCell>
+                        <TableCell align="left">{truncateText(row.sendername)}</TableCell>
+                        <TableCell align="left">{truncateText(row.receivername)}</TableCell>
+                        <TableCell sx={{fontWeight: isSmallScreen ? 500 : 600,letterSpacing:"1px"}} align="left">
+                        {row.status === 0 && <span>{<button  className={`rounded-lg ${isSmallScreen ? "p-1" : "p-2"} bg-yellow-400` }>Penting</button>}</span>}
+                        {row.status === 1 && <span>{<button  className={`rounded-lg ${ isSmallScreen ? "p-1" : "p-2" } bg-green-400`}>Approve</button>}</span>}
+                        {row.status === 2 && <span>{<button className={`rounded-lg ${isSmallScreen ? "p-1" : "p-2"}  bg-red-500`}>Decline</button>}</span>}
                         </TableCell>
                        
                       </TableRow>

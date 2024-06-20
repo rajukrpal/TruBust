@@ -10,7 +10,7 @@ const LogsPage = () => {
     <Box height={64} />
       <Box sx={{ display: 'flex' }}  >
       <SideNav/>
-      <Box sx={{ minWidth: 240}} className="p-5 w-full lg:px-[72px]">
+      <Box sx={{ minWidth: 240}} className="py-2  w-full lg:px-2">
         <Logs />
       </Box>
       </Box>

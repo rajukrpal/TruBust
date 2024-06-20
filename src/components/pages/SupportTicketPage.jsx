@@ -11,7 +11,7 @@ const SupportTicketPage = () => {
     <Box height={64} />
       <Box sx={{ display: 'flex' }}  >
       <SideNav/>
-      <Box sx={{ minWidth: 240}} className="p-5 w-full lg:px-[72px]">
+      <Box sx={{ minWidth: 210}} className="py-2 w-full lg:px-2">
         <SupportTicket />
       </Box>
       </Box>

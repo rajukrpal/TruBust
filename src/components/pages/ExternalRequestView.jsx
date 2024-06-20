@@ -13,7 +13,7 @@ import Paper from "@mui/material/Paper";
 import {GetExternalApi } from "../../dataApi/Data";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import ViewPage from "../form/ViewPage";
 import { PiWechatLogo } from "react-icons/pi";
 import ChatsForm from "../form/ChatsForm";
@@ -95,6 +95,31 @@ const ExternalRequestView = () => {
     setShowForm(true);
   };
 
+  const isSmallScreen = useMediaQuery('(max-width:768px)');
+
+  const truncate = (text, maxLength) => {
+    if (!text) {
+      return <span className="text-[#EF3E36]"> No Name</span>; // Return "No Name" if text is falsy (null, undefined, empty string)
+    }
+    
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    
+    return text;
+  };
+  
+  
+  const truncateText = (text, maxLength) => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      return truncate(text, 1); 
+    } else if(screenWidth < 1024) {
+      return truncate(text, 10); 
+    } else{
+      return truncate(text, 25);
+    }
+  };
 
   return (
     <>
@@ -106,7 +131,7 @@ const ExternalRequestView = () => {
         <Box
           sx={{
             width: "100%",
-            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
             borderRadius: "10px",
           }}
           className=""
@@ -120,117 +145,117 @@ const ExternalRequestView = () => {
             <TableContainer className="px-2">
               <hr />
               <Table
-                sx={{ minWidth: 310, border: "" }}
+                sx={{ minWidth: 610, border: "" }}
                 aria-labelledby="tableTitle"
               >
                 <TableRow className="">
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("Date")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
-                    Date {getArrow("Date")}
+                    {isSmallScreen ? "d.." : "date" } {getArrow("Date")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "190px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("Company_name")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
-                    Company name {getArrow("Company_name")}
+                    {isSmallScreen ? "c.." : "Company name" } {getArrow("Company_name")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("user_name")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    user name {getArrow("user_name")}
+                    {isSmallScreen ? "u.." : "user name" } {getArrow("user_name")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("message")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    message {getArrow("message")}
+                    {isSmallScreen ? "m.." : "message" } {getArrow("message")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("image")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    image {getArrow("image")}
+                    {isSmallScreen ? "i.." : "image" } {getArrow("image")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("request_id")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    request id {getArrow("request_id")}
+                    {isSmallScreen ? "r.." : "request id" } {getArrow("request_id")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("stutas")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    stutas {getArrow("stutas")}
+                    {isSmallScreen ? "s.." : "stutas" } {getArrow("stutas")}
                   </TableCell>
                 
                   <TableCell
                     className="uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("action")}
                   >
-                    action {getArrow("action")}
+                    {isSmallScreen ? "a.." : "action" }  {getArrow("action")}
                   </TableCell>
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
-                      padding: "12px 14px",
+                      width: isSmallScreen ? '50px' : '100px',
+                      padding: isSmallScreen ? "1px 1px" : "12px 14px",
                       fontWeight: 600,
                     }}
                     onClick={() => handleSort("replay")}
                   >
                     <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
-                    replay {getArrow("replay")}
+                    {isSmallScreen ? "r.." : "replay" } {getArrow("replay")}
                   </TableCell>
                 </TableRow>
 
@@ -241,24 +266,25 @@ const ExternalRequestView = () => {
                       <TableRow key={row.id}>
                         <TableCell component="th" scope="row" padding="none">
                           <div className="flex items-center">
-                          {new Date(row.created_at).toLocaleDateString()}
+                          {truncateText(new Date(row.created_at).toLocaleDateString())}
                           </div>
                         </TableCell>
-                        <TableCell align="left">{row.company_name}</TableCell>
-                        <TableCell align="left">{row.username}</TableCell>
-                        <TableCell align="left">{row.message}</TableCell>
-                        <TableCell align="left"><img className="w-20 rounded-md" src={row.image} alt="" /></TableCell>
-                        <TableCell align="left">{row.requestID}</TableCell>
+                        <TableCell align="left">
+                          <div>{truncateText(row.company_name)}</div></TableCell>
+                        <TableCell align="left">{truncateText(row.username)}</TableCell>
+                        <TableCell align="left">{truncateText(row.message)}</TableCell>
+                        <TableCell align="left"><img className={`${isSmallScreen ? "w-20" : "w-20"} rounded-md`} src={row.image} alt="" /></TableCell>
+                        <TableCell align="left">{truncateText(row.requestID)}</TableCell>
                         <TableCell sx={{fontWeight:600,letterSpacing:"1px"}} align="left">
-                        {row.status === 0 && <span>{<button className="rounded-lg p-2 bg-yellow-400 ">Penting</button>}</span>}
-                        {row.status === 1 && <span>{<button className="rounded-lg p-2 bg-green-400">Approve</button>}</span>}
-                        {row.status === 2 && <span>{<button className="rounded-lg p-2  bg-red-500">Decline</button>}</span>}
+                        {row.status === 0 && <span>{<button className="rounded-lg p-2 border text-[#ACB92D] border-yellow-400 ">{truncateText("Penting")}</button>}</span>}
+                        {row.status === 1 && <span>{<button className="rounded-lg p-2 border text-[#6CDC3C] border-green-400">{truncateText("Approve")}</button>}</span>}
+                        {row.status === 2 && <span>{<button className="rounded-lg p-2 border text-[#EE381B]  border-red-500">{truncateText("Decline")}</button>}</span>}
                         </TableCell>
                         <TableCell sx={{fontWeight:600 , color:"white", letterSpacing:"1px"}} align="left">
                         {row.status === 0 && <span>{
                           <div className="flex gap-3">
-                            <button className="rounded-lg p-2 bg-green-400 " >Approve</button> 
-                            <button className="rounded-lg p-2 bg-red-500 " >Decline</button>
+                            <button className="rounded-lg p-2 bg-green-400 " >{truncateText("Approve")}</button> 
+                            <button className="rounded-lg p-2 bg-red-500 " >{truncateText("Decline")}</button>
                             </div>}</span>}
                         {row.status === 1 && <span>{null}</span>}
                         {row.status === 2 && <span>{null}</span>}

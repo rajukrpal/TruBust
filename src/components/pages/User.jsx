@@ -10,12 +10,14 @@ import Paper from "@mui/material/Paper";
 import { GenerateOtpApi, GetUserApi, deleteUserFunction } from "../../dataApi/Data";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ViewPage from "../form/ViewPage";
 import AddUserForm from "../form/AddUserForm";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const User = () => {
   const [table, setTable] = useState([]);
@@ -29,6 +31,21 @@ const User = () => {
 
   const [rowData, setRowData] = useState(null);
   const [companyData, setCompanyData] = useState("");
+
+  const notifySMS = () => toast.success("Varification code send successfully!");
+  const notifyDELETE = () => toast.success("User Delete successfully!");
+
+  useEffect(() => {
+    const handleResize = () => {
+      setFilteredTable([...filteredTable]);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [filteredTable]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,6 +114,7 @@ const User = () => {
 
   const handleDelete = async (id) => {
     try {
+      notifyDELETE()
       await deleteUserFunction(id);
 
       setTable((prevTable) => prevTable.filter((item) => item.id !== id));
@@ -112,11 +130,32 @@ const User = () => {
 
   const genretVerificationCode = async(id) => {  
     try {
+      notifySMS()
       const responsVerification = await GenerateOtpApi(id);
     } catch (error) {
       console.log(error)
     }
   }
+
+  const isSmallScreen = useMediaQuery('(max-width:768px)');
+
+  const truncate = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  };
+
+  const truncateText = (text, maxLength) => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      return truncate(text, 10); 
+    } else if(screenWidth < 1024) {
+      return truncate(text, 10); 
+    } else{
+      return truncate(text, 25);
+    }
+  };
 
 
   return (
@@ -129,14 +168,14 @@ const User = () => {
         <Box
           sx={{
             width: "100%",
-            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
             borderRadius: "10px",
           }}
           className=""
         >
           <Box className="">
             <div className="flex justify-end p-6">
-              <Button variant="contained" onClick={handalAddForm}>
+              <Button size={isSmallScreen ? "small" : "medium"} variant="contained" onClick={handalAddForm}>
                 <AddIcon sx={{ fontSize: "20px" }} />
                 &nbsp; Add user
               </Button>
@@ -146,14 +185,14 @@ const User = () => {
             <TableContainer className="px-2 raju" >
               <hr />
               <Table
-                sx={{ minWidth: 240, border: "" }}
+                sx={{ minWidth: 1024, border: "" }}
                 aria-labelledby="tableTitle"
               >
                 <TableRow className="">
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "130px",
+                      width: isSmallScreen ? '250px' : '250px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -177,7 +216,7 @@ const User = () => {
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '200px' : '200px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -189,7 +228,7 @@ const User = () => {
                   <TableCell
                     className="relative uppercase"
                     style={{
-                      width: "150px",
+                      width: isSmallScreen ? '200px' : '200px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -201,7 +240,7 @@ const User = () => {
                   <TableCell
                     className="uppercase"
                     style={{
-                      width: "130px",
+                      width: isSmallScreen ? '400px' : '400px',
                       padding: "12px 14px",
                       fontWeight: 600,
                     }}
@@ -222,7 +261,7 @@ const User = () => {
                           </div>
                         </TableCell>
                         <TableCell align="left">{row.name}</TableCell>
-                        <TableCell align="left">{row.email}</TableCell>
+                        <TableCell align="left">{truncateText(row.email)}</TableCell>
                         <TableCell align="left">{row.phone}</TableCell>
                         <TableCell align="left">
                           <div className="flex gap-5 w-full">
@@ -235,6 +274,7 @@ const User = () => {
                             <Button sx={{ padding: 0 }} color="error">
                               <DeleteForeverIcon />
                             </Button>
+                            <ToastContainer position="bottom-right" />
                             </div>
                             <div onClick={()=>genretVerificationCode(row.id)} className="w-[100%]">
                             <Button variant="outlined"
@@ -244,6 +284,7 @@ const User = () => {
                             >
                               Genret verification code
                             </Button>
+                            <ToastContainer position="bottom-right" />
                             </div>
                            
                           </div>

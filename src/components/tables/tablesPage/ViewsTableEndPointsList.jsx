@@ -46,7 +46,7 @@ const ViewsTableEndPointsList = ({ endPointsList }) => {
   return (
     <Box sx={{
       width: "100%",
-      boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+      boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
       borderRadius: "10px",
       padding:""
        }}>
@@ -60,7 +60,7 @@ const ViewsTableEndPointsList = ({ endPointsList }) => {
         <TableContainer className="px-2">
           <hr />
           <Table
-            sx={{ minWidth: 750, border: "" }}
+            sx={{ minWidth: 650, border: "" }}
             aria-labelledby="tableTitle"
           >
             <TableRow className="">

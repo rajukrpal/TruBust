@@ -38,6 +38,8 @@ const Logs = () => {
     setIsShowingErrors(!isShowingErrors);
   };
 
+  // const isSmallScreen = useMediaQuery('(max-width:768px)');
+
   const Row = ({ index, style }) => (
     <div style={style} className={isShowingErrors ? `text-red-500` : `text-white`}>
       {isShowingErrors ? logErrorData[index] : logData[index]}
@@ -47,7 +49,7 @@ const Logs = () => {
   return (
     <div className="w-full">
       <div className="py-2 flex justify-end">
-        <Button variant="contained" onClick={toggleLogs}>
+        <Button size={isMobile ? "small" : "medium"} variant="contained" onClick={toggleLogs}>
           {isShowingErrors ? "View System Logs" : "View Error Logs"}
         </Button>
       </div>

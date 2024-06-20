@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { companyPageTable } from "../../dataApi/Data";
-// import axios from "axios";
 
 const AddForm = ({ rowData }) => {
   const [showForm, setShowForm] = useState(true);
@@ -199,7 +198,7 @@ const AddForm = ({ rowData }) => {
     <div>
       {showForm ? (
         <>
-          <div className="border border-black p-5 rounded-lg">
+          <div className=" rounded-lg">
             <div className="flex items-center px-4 justify-between p-4 pb-6">
               <div>
                 <h1 className="py-5 font-semibold md:text-[20px] ">

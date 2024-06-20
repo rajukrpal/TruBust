@@ -9,7 +9,7 @@ import { GetGroupChat, GetGroupChatList, sendGroupChat } from "../../dataApi/Dat
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import DuoIcon from "@mui/icons-material/Duo";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Button, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 const SecureChannel = () => {
@@ -86,8 +86,16 @@ const SecureChannel = () => {
 
   return (
     <div className="w-full">
-      <div className="lg:grid grid-cols-12 h-[82vh] lg:border border-black rounded-lg">
-        <div className="col-span-3 border border-r-black ">
+ <Box
+          sx={{
+            width: "100%",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
+            borderRadius: "10px",
+          }}
+          className=""
+        >
+      <div className="lg:grid grid-cols-12 lg:h-[84vh] ">
+        <div className="col-span-3 border border-r-gray-300 ">
           <div className="p-3 ">
             <div className="flex items-center rounded-lg">
               <SearchIcon />
@@ -131,7 +139,7 @@ const SecureChannel = () => {
             </div>
           ) : (
             <div className="">
-              <div className="flex justify-between items-center border border-b-black py-3 px-2">
+              <div className="flex justify-between items-center border border-b-gray-300 py-3 px-2">
                 <div className="flex items-center gap-3">
                   <img
                     className="h-10 w-10 rounded-full"
@@ -264,6 +272,7 @@ const SecureChannel = () => {
           )}
         </div>
       </div>
+      </Box>
     </div>
   );
 };

@@ -93,10 +93,10 @@ const SideNav = () => {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                     background:
-                    location.pathname === "/analytics"
-                      ? "yellow"
-                      : "your_default_color_here",
-                  borderRadius:
+                    // location.pathname === "/analytics"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
+                  // borderRadius:
                     location.pathname === "/analytics"
                       ? "9px"
                       : "your_default_color_here",
@@ -143,10 +143,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/company"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/company"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/company"
                       ? "9px"
@@ -193,10 +193,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/user"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/user"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/user"
                       ? "9px"
@@ -242,10 +242,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/support-ticket"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/support-ticket"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/support-ticket"
                       ? "9px"
@@ -293,10 +293,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/external-request-view"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/external-request-view"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/external-request-view"
                       ? "9px"
@@ -344,10 +344,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/internal-request-view"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/internal-request-view"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/internal-request-view"
                       ? "9px"
@@ -395,10 +395,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/secure-channel"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/secure-channel"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/secure-channel"
                       ? "9px"
@@ -445,10 +445,10 @@ const SideNav = () => {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                    background:
-                    location.pathname === "/logs"
-                      ? "yellow"
-                      : "your_default_color_here",
+                    // background:
+                    // location.pathname === "/logs"
+                    //   ? "yellow"
+                    //   : "your_default_color_here",
                   borderRadius:
                     location.pathname === "/logs"
                       ? "9px"

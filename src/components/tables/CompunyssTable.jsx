@@ -13,13 +13,15 @@ import Paper from "@mui/material/Paper";
 import { deleteDataFunction, getCopmonypageTable, singleCompany } from "../../dataApi/Data";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddForm from "../form/AddForm";
 import ViewPage from "../form/ViewPage";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const CompunyssTable = () => {
   const [table, setTable] = useState([]);
@@ -33,6 +35,21 @@ const CompunyssTable = () => {
 
   const [rowData, setRowData] = useState(null);
   const [companyData,setCompanyData] = useState("");
+
+
+  const notifyDelete = () => toast.success("Company Deleted SuccessFully");
+
+  useEffect(() => {
+    const handleResize = () => {
+      setFilteredTable([...filteredTable]);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [filteredTable]);
 
 
   useEffect(() => {
@@ -99,7 +116,6 @@ const CompunyssTable = () => {
     console.log(row.id)
     const companyID = row.id
          const singalPageData = await singleCompany(companyID)
-         console.log("dataSinglePage",singalPageData.data.data)
          setCompanyData(singalPageData.data.data);
     setViewForm(true);
 
@@ -114,6 +130,7 @@ setShowForm(true);
 const handleDelete = async (id) => {
   try {
     await deleteDataFunction(id);
+    notifyDelete()
     
     setTable((prevTable) => prevTable.filter((item) => item.id !== id));
     
@@ -124,6 +141,30 @@ const handleDelete = async (id) => {
   }
 };
 
+// const truncate = (string,num)=>{
+//   return string?.length > num ? string.substr(0,num-1) + '...' : string ;
+// }
+
+const truncate = (text, maxLength) => {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + '...';
+  }
+  return text;
+};
+
+
+const truncateText = (text, maxLength) => {
+  const screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    return truncate(text, 10); 
+  } else if(screenWidth < 1024) {
+    return truncate(text, 10); 
+  } else{
+    return truncate(text, 25);
+  }
+};
+
+const isSmallScreen = useMediaQuery('(max-width:768px)');
 
 
   return (
@@ -137,14 +178,14 @@ const handleDelete = async (id) => {
       <Box
       sx={{
         width: "100%",
-        boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.8)",
+        boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
         borderRadius: "10px",
       }}
       className=""
     >
       <Box className="">
         <div className="flex justify-end p-6">
-          <Button variant="contained" onClick={handalAddForm}>
+          <Button  size={isSmallScreen ? "small" : "medium"} variant="contained" onClick={handalAddForm}>
             <AddIcon sx={{ fontSize: "20px" }} />
             &nbsp; Add Company
           </Button>
@@ -154,13 +195,13 @@ const handleDelete = async (id) => {
         <TableContainer className="px-2">
           <hr />
           <Table
-            sx={{ minWidth: 310, border: "" }}
+            sx={{ minWidth: 810, border: "" }}
             aria-labelledby="tableTitle"
           >
             <TableRow className="">
               <TableCell
                 className="relative uppercase"
-                style={{ width: "100px", padding: "12px 14px", fontWeight: 600 }}
+                style={{ width: isSmallScreen ? '200px' : '200px', padding: "12px 14px", fontWeight: 600 }}
                 onClick={() => handleSort("name")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
@@ -168,7 +209,7 @@ const handleDelete = async (id) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "100px", padding: "12px 14px", fontWeight: 600 }}
+                style={{ width: "180px", padding: "12px 14px", fontWeight: 600 }}
                 onClick={() => handleSort("total_internal_requests")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-[''] "></div>
@@ -176,7 +217,7 @@ const handleDelete = async (id) => {
               </TableCell>
               <TableCell
                 className="relative uppercase"
-                style={{ width: "100px", padding: "12px 14px", fontWeight: 600 }}
+                style={{ width: "150px", padding: "12px 14px", fontWeight: 600 }}
                 onClick={() => handleSort("total_users")}
               >
                 <div className="absolute h-6 w-[1px] bg-gray-300 right-0 containt-['']  "></div>
@@ -195,16 +236,16 @@ const handleDelete = async (id) => {
               {filteredTable
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
+                  
                   <TableRow key={row.id}>
-                    <TableCell component="th" scope="row" padding="none">
+                    <TableCell  component="th" scope="row" padding="none">
                         <div className="flex gap-5 items-center">
                         <img className="h-8 w-8 rounded-full" src={row.companyLogo} alt="" />
-                      {row.name}
+                       <span>{truncateText(row.name)}</span>
                         </div>
-                       
                     </TableCell>
                     <TableCell align="left">
-                      {row.email}
+                    <span>{truncateText(row.email)}</span>
                     </TableCell>
                     <TableCell align="left">{row.country}</TableCell>
                     <TableCell align="left">
@@ -229,6 +270,7 @@ const handleDelete = async (id) => {
                   </TableRow>
                 ))}
             </TableBody>
+            <ToastContainer position="bottom-right" />
           </Table>
         </TableContainer>
         <TablePagination

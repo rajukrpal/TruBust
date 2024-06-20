@@ -296,7 +296,7 @@ export const GenerateOtpApi = async (id) => {
         );
         
         if (response.status === 200) {
-            console.log("Varification code send successfully!");
+            // console.log("Varification code send successfully!");
 
         } else {
             console.error("userId  field is required.");
